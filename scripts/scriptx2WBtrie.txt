@@ -1,0 +1,4 @@
+./tools/build_x2wBTries  "/mnt/c/JOSE M/data_sets/gov2sample20000.bin" --rank v --out "/mnt/c/JOSE M/data_sets/x2WTries_gov2_v_64_full.bin" --min_size 4096 --wsize 64
+./tools/intersection_querylog_x2WBTrie "/mnt/c/JOSE M/data_sets/x2WTries_gov2_v_64_full.bin" ../queries/Gov2/1mq.txt --parallel t 
+
+./test/test_x2WBtries "/mnt/c/JOSE M/data_sets/gov2sample20000.bin" ../queries/Gov2/1mq.txt --rank v --wsize 64  --min_size 4096 --parallel t

@@ -1,0 +1,6 @@
+./tools/build_x3WRBTries "/mnt/c/JOSE M/data_sets/gov2sample20000.bin" --rank v --runs f --out "/mnt/c/JOSE M/data_sets/gov2_v_64_xRWFast.bin" --min_size 4096 --wsize 64
+./tools/intersection_querylog_x3WRBTrie "/mnt/c/JOSE M/data_sets/gov2_v_64_xRWFast.bin" ../queries/Gov2/1mq.txt --parallel t --out "/mnt/c/JOSE M/result/result_gov2_v_64_xRWFast.txt"
+
+
+./test/test_x3WRBtries "/mnt/c/JOSE M/data_sets/gov2sample20000.bin" ../queries/Gov2/1mq.txt --rank v --wsize 64  --min_size 4096 --parallel t
+
