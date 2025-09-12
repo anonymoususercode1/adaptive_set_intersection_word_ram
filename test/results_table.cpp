@@ -57,7 +57,7 @@ int main() {
     std::vector<std::string> datasets = {"Gov2", "ClueWeb09", "CC-News"};
     std::vector<std::string> algorithms = {"wBtrie", "x2WBtrie", "x2WRBtrie", "x2WTRBtrie", "x3WRBtrie", "x3WTRBtrie"};
     std::string input_dir = "outputs/";
-    std::string output_file = "tabla_resultados.md";
+    std::string output_file = "results_table.md";
     
     std::map<std::string, std::map<std::string, AlgoritmoResult>> results;
 
