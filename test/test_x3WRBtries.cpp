@@ -174,7 +174,7 @@ void processCollectionAndQueries(
         delete T.second;
 
     // std::cout << "sets_read,total_elements,avg_size_bits_per_element,number_queries,avg_time" << n_il << std::endl;
-    std::cout << n_il << "," << total_elements << "," << (float)(total_size*8)/total_elements << "," << nq << "," << (double)(total_time*1e-3)/(nq*rep)<< "," << (double)(size_all_intersections/nq)  << std::endl;
+    std::cout << n_il << "," << total_elements << "," << (float)(total_size*8)/total_elements << "," << nq << "," << (double)(total_time*1e-3)/(nq*rep) << std::endl;
 }
 
 int main(int argc, char const *argv[]) {
