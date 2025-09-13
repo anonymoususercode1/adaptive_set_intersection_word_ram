@@ -54,9 +54,10 @@ From the project's root directory, execute the runme.sh script and provide the p
 
 ```bash
 ./runme.sh [path_to_the_datasets_folder]
-
+```
 
 The script will run all the tests and generate a file called results_table.md in the same directory, which contains the results in a table similar to the one in the paper.
+
 
 
 
