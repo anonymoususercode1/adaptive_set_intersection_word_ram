@@ -52,10 +52,11 @@ Get all the datasets from this link: https://drive.google.com/drive/folders/15rW
 From the project's root directory, execute the runme.sh script and provide the path to the folder where you saved the datasets.
 
 
-```bash
+`bash
 ./runme.sh [path_to_the_datasets_folder]
     
 The script will run all the tests and generate a file called results_table.md in the same directory, which contains the results in a table similar to the one in the paper.
+
 
 
 
