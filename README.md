@@ -42,3 +42,15 @@ Where:
 ## Replicate Results
 If you want replicate the results of paper, yo can download CC-News inverted index already processed by Mackenzie et al. in CIFF format from here: <http://go.unimelb.edu.au/u3nj>, and you can transform the index from CIFF to PISA format using <https://github.com/pisa-engine/ciff>.
 
+## Reproducing Results for Artifact Evaluation (AE)
+To reproduce the paper's experiments, follow these two steps:
+
+* Download the Data
+Get all the datasets from this link: https://drive.google.com/drive/folders/15rWyik07PbCrXqJzc2oMEPlqLQXhiNbx
+
+* Run the Script
+From the project's root directory, execute the runme.sh script and provide the path to the folder where you saved the datasets.
+
+    ./runme.sh [path_to_the_datasets_folder]
+   
+The script will run all the tests and generate a file called results_table.md in the same directory, which contains the results in a table similar to the one in the paper.
