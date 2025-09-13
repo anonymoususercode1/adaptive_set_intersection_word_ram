@@ -55,9 +55,9 @@ AlgoritmoResult read_csv_file(const std::string& filepath) {
 int main() {
     // Definir los datasets y algoritmos
     std::vector<std::string> datasets = {"Gov2", "ClueWeb09", "CC-News"};
-    std::vector<std::string> algorithms = {"wBtrie", "x2WBtrie", "x2WRBtrie", "x2WTRBtrie", "x3WRBtrie", "x3WTRBtrie"};
-    std::string input_dir = "outputs/";
-    std::string output_file = "results_table.md";
+    std::vector<std::string> algorithms = {"wBtrie",  "x2WRBtrie", "x3WRBtrie", "x3WTRBtrie", "NPx3WRBtrie"};//"x2WBtrie","x2WTRBtrie", 
+    std::string input_dir = "../outputs/";
+    std::string output_file = "../results_table.md";
     
     std::map<std::string, std::map<std::string, AlgoritmoResult>> results;
 
@@ -129,7 +129,7 @@ int main() {
     if (out_file.is_open()) {
         out_file << table_ss.str();
         out_file.close();
-        std::cout << "\nTable generated successfully in'" << output_file << "'!" << std::endl;
+        std::cout << "Table generated successfully in'" << output_file << "'!" << std::endl;
     } else {
         std::cerr << "Error: Could not create output file'" << output_file << "'" << std::endl;
     }
