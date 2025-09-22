@@ -7,7 +7,7 @@ The code was tested in ubuntu 22.04.5, cmake 3.22.1 and gcc 11.4.0 version. The 
 To build the code in linux sistems, you have two options:
 
 **Option 1: Automated Build (Recommended)**
-For a quick and easy setup, use the provided `buildme.sh` script. This script takes care of downloading the sdsl library and compiling the project for you.
+For a quick and easy setup, use the provided `buildme.sh` script. This script takes care of downloading the sdsl library directly into the build directory, and then it compiles the project for you.
 
 To build the code, simply run the script from the repository's root directory:
 
@@ -72,6 +72,7 @@ From the project's root directory, execute the `runme.sh` script and provide the
 ```
 
 The script will run all the tests. Upon completion, it will generate a file named `results_table.md` containing the results in a table similar to the one in the paper. Additionally, it will create a `.png` plot for each dataset, which will also be saved in the same directory.
+
 
 
 
