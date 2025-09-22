@@ -164,7 +164,7 @@ class x3WTRBinaryTrie{
         inline uint64_t size_in_bytes() {
             uint64_t trieLevel_size = 0;
             uint16_t trieLevelSize = popcount(firstLevel);
-            // Recorrer usando un índice
+            
             for (uint16_t i = 0; i < trieLevelSize; ++i) {
                 trieLevel_size += x3WTRBinaryTrie::trieLevel[i]->size_in_bytes() + sizeof(x3WTRBinaryTrie::trieLevel[i]);
             }
@@ -176,7 +176,7 @@ class x3WTRBinaryTrie{
         inline uint64_t size_all_in_bytes() {
             uint64_t trieLevel_size = 0;
             uint16_t trieLevelSize = popcount(firstLevel);
-            // Recorrer usando un índice
+            
             for (uint16_t i = 0; i < trieLevelSize; ++i) {
                 trieLevel_size += x3WTRBinaryTrie::trieLevel[i]->size_in_bytes() + sizeof(x3WTRBinaryTrie::trieLevel[i]);
             }
@@ -216,7 +216,7 @@ class x3WTRBinaryTrie{
 
             if (trieLevel != nullptr) {
                 uint16_t trieLevelSize = popcount(firstLevel);
-                // Recorrer usando un índice
+                
                 for (uint16_t i = 0; i < trieLevelSize; ++i) {
                     if (trieLevel[i] != nullptr) {
                         delete trieLevel[i];

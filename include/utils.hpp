@@ -11,7 +11,6 @@
 
 #define MAX_BIT 100000000000
 
-// Estructura para almacenar un par de coordenadas y valor
 struct Coordinate {
     uint32_t x;
     uint32_t y;

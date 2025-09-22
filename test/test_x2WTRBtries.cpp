@@ -222,7 +222,7 @@ int main(int argc, char const *argv[]) {
                 rank = 0;
             }
             else {
-                rank = 2; // Asumiendo v5 o cualquier otro
+                rank = 2;
             }
         }
         if (std::string(argv[i]) == "--wsize"){

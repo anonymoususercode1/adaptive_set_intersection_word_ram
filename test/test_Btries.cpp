@@ -238,7 +238,7 @@ int main(int argc, char const *argv[]) {
                 rank = 1;
             }
             else {
-                rank = 2; // Asumiendo v5 o cualquier otro
+                rank = 2;
             }
         }
     }

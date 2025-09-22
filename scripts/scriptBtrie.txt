@@ -1,4 +1,0 @@
-./tools/build_BTries  "/mnt/c/JOSE M/data_sets/gov2.docs" --rank v --runs f --out "/mnt/c/JOSE M/data_sets/fastTries_gov2_v_64_full.bin" --min_size 4096
-./tools/intersection_querylog_BTries "/mnt/c/JOSE M/data_sets/fastTries_gov2_v_64_full.bin" ../queries/Gov2/1mq.txt --parallel t 
-
-"/mnt/c/JOSE M/data_sets/gov2.docs" ../queries/Gov2/1mq.txt --min_size 4096 --parallel t
