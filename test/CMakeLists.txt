@@ -1,3 +1,4 @@
+add_executable(test_Btries test_Btries.cpp)
 add_executable(test_wBtries test_wBtries.cpp)
 add_executable(test_x2WBtries test_x2WBtries.cpp)
 add_executable(test_x2WRBtries test_x2WRBtries.cpp)
@@ -6,6 +7,7 @@ add_executable(test_x3WRBtries test_x3WRBtries.cpp)
 add_executable(test_x3WTRBtries test_x3WTRBtries.cpp)
 add_executable(results_table results_table.cpp)
 
+target_link_libraries(test_Btries PUBLIC intersection pthread sdsl divsufsort divsufsort64)
 target_link_libraries(test_wBtries PUBLIC wBTrieIntersection pthread sdsl divsufsort divsufsort64)
 target_link_libraries(test_x2WBtries PUBLIC x2WBTrieIntersection pthread sdsl divsufsort divsufsort64)
 target_link_libraries(test_x2WRBtries PUBLIC x2WRBTrieIntersection pthread sdsl divsufsort divsufsort64)

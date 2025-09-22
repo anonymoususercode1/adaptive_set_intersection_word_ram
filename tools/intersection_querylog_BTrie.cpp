@@ -12,10 +12,11 @@
 #include "../include/intersection.hpp"
 #include "../include/binaryTrie.hpp"
 
+
 using namespace std;
 using namespace sdsl;
 
-int rankType = 0;
+int rankType = 10;
 bool runs = false;
 bool levelwise = false;
 uint32_t block_size = 512; //Only needed on binTrie_il
@@ -23,30 +24,21 @@ bool verbose = false;
 bool parallel = true;
 
 
+map<uint64_t, binaryTrie*> loadSequences(ifstream &in, vector<vector<uint32_t>> &queries, u_int64_t n){
+    vector<uint64_t> setIndexes;
+    for(auto q: queries)
+        setIndexes.insert(setIndexes.end(), q.begin(), q.end());
+    sort(setIndexes.begin(), setIndexes.end());
+    setIndexes.erase(unique(setIndexes.begin(), setIndexes.end()), setIndexes.end());
 
-vector<binaryTrie*> loadSequences(std::ifstream &in) {
-    vector<binaryTrie*> sequences;
-    if (!in.is_open()) {
-        std::cout << "File is not open" << endl;
-        return sequences;
-    }
-
-    uint32_t _1, u, n;
-    in.read(reinterpret_cast<char*>(&n), sizeof(n));
-    in.read(reinterpret_cast<char*>(&_1), sizeof(_1));
-    in.read(reinterpret_cast<char*>(&u), sizeof(u));
-    std::cout << "Num. of sets: " << n << std::endl;
-    std::cout << "Universe: "<< u << std::endl;
-    
-    uint64_t count = 0;
-    while ( count < n ) {
-        if (in.eof()){
-            break;
-        }
+    map<uint64_t, binaryTrie*> tries; 
+    uint64_t nIl = 0;
+    uint32_t np = 0;
+    for(uint32_t i = 0; i < n; ++i) {        
         binaryTrie* trie;
         if (rankType == 0){
             if (levelwise)
-                trie = new binTrie<sdsl::rank_support_v<1>>();
+                trie = new binTrie<rank_support_v<1>>();
             else 
                 trie = new flatBinTrie<rank_support_v<1>>();
         }
@@ -75,32 +67,40 @@ vector<binaryTrie*> loadSequences(std::ifstream &in) {
                 trie = new binTrie<rank_support_v5<1>>;
             else
                 trie = new flatBinTrie<rank_support_v5<1>>;
-        }
+        }     
+       
         trie -> load(in);
-        sequences.push_back(trie);
-        count++;
+        if (i == setIndexes[np]){
+            tries.insert({i, trie});
+            np++;
+            if (np == setIndexes.size()) break;
+        }
+        else { // I dont now how space will use the trie
+            delete trie;
+        }
     }
-    return sequences;
+    in.close();
+    return tries;
 }
 
-
-vector<vector<uint32_t>> loadQueryLog(std::string path) {
+vector<vector<uint32_t>> loadQueryLog(string queryPath, uint64_t n){
     vector<vector<uint32_t>> queries;
-    std::ifstream in(path);
-    if (!in.is_open()) {
-        std::cout << "Can't open file: " << path << std::endl;
+    ifstream in(queryPath);
+    if (!in.is_open()){
+        cerr << "Can't open file: " << queryPath << "\n";
         return queries;
     }
-    std::string line;
-    while(std::getline(in, line)) {
-        std::vector<uint32_t> query;
-
-        std::istringstream iss(line);
-        for (std::string s; iss >> s;) {
-            uint32_t id = (uint32_t)stoi(s);
-            query.push_back(id);
+    string line;
+    while(getline(in, line)) {
+        vector<uint32_t> query;
+        istringstream iss(line);
+        for (string s; iss >> s;) {
+            uint32_t id = (uint32_t)stoull(s);
+            if(id < n)
+                query.push_back(id);
         }
-        queries.push_back(query);
+        if(query.size() > 1)
+            queries.push_back(query);
     }
     in.close();
     return queries;
@@ -113,16 +113,23 @@ void performIntersections( std::ifstream &in_sequences, std::string query_path,
     std::ofstream out;
     if (out_path != "") {
         out.open(out_path, std::ios::out);
-        out << "query_number,elements_per_query,time execution,size_intersection" << std::endl; 
+        out << "elements_per_query,time execution,size_intersection" << std::endl; 
     }
     
     vector<vector<uint32_t>> queries;
-    vector<binaryTrie*> sequences;
-
-    sequences = loadSequences(in_sequences);
-    cout << "Sequences loaded succefully, Total: " << sequences.size() << endl;
-    queries   = loadQueryLog(query_path);
+    // vector<binaryTrie*> sequences;
+    map<uint64_t, binaryTrie*> sequences;
+    uint32_t _1, u, n;
+    in_sequences.read(reinterpret_cast<char*>(&n), sizeof(n));
+    in_sequences.read(reinterpret_cast<char*>(&_1), sizeof(_1));
+    in_sequences.read(reinterpret_cast<char*>(&u), sizeof(u));
+    std::cout << "Num. of sets: " << n << std::endl;
+    std::cout << "Universe: "<< u << std::endl;
+    
+    queries  = loadQueryLog(query_path, n);
     cout << "Queries loaded succefully, Total: " << queries.size() << "" << endl;
+    sequences = loadSequences(in_sequences, queries, n);
+    cout << "Sequences loaded succefully, Total: " << sequences.size() << endl;
 
     std::cout << "Computing queries...\n";
     uint64_t nq = 0;
@@ -131,10 +138,14 @@ void performIntersections( std::ifstream &in_sequences, std::string query_path,
     auto start = std::chrono::high_resolution_clock::now();
     for (auto q: queries) {
         vector<binaryTrie*> QTries;
-        for (auto i: q)
+        // cout << "Query: ";
+        for (auto i: q) {
             QTries.push_back(sequences[i]);
+            // std::cout << i << " ";
+        }
+        // std::cout << std::endl;
         vector<uint64_t> intersection;
-        if (QTries.size() <= 16){
+        if (QTries.size() <= 16 ){
             uint64_t time_10 = 0;
             for(int rep = 0; rep < trep; ++rep) {
                 auto start = std::chrono::high_resolution_clock::now();
@@ -148,15 +159,14 @@ void performIntersections( std::ifstream &in_sequences, std::string query_path,
                     intersection.clear();       
             }
             if (out.is_open()) {
-                out <<  nq << "," << QTries.size() << "," 
-                    <<  (double)(time_10*1e-3)/trep << "," 
+                out << QTries.size() << "," << (float)time_10/trep<< "," 
                     << intersection.size() 
                     << std::endl;
             }
-            size_all_intersections += intersection.size();
-            intersection.clear();
             // std::cout << nq <<"|Time execution: " << (double)(time_10*1e-3)/(trep) << "[ms] " << intersection.size() << std::endl;
             ++nq;
+            // cout << "End query: " << nq << " | Size intersection: " << intersection.size() << endl;
+            size_all_intersections += intersection.size();
             if (verbose && nq % 1000 == 0) {
                 std::cout << nq << " queries processed" << std::endl;
             }
@@ -165,7 +175,7 @@ void performIntersections( std::ifstream &in_sequences, std::string query_path,
     out.close();
 
     for (auto T: sequences)
-        delete T;
+        delete T.second;
 
     std::cout << "Number of queries: " << nq << std::endl;
     std::cout << "Total size of intersections: " << size_all_intersections << std::endl;

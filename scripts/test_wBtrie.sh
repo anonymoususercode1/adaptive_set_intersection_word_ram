@@ -30,9 +30,11 @@ done
 
 
 echo "sets_read,total_elements,avg_size_bits_per_element,number_queries,avg_time"
+./../build/test/test_wBtries "$data_sets_file" "$query_file" --rank v5 --wsize 8 --min_size "$min_size" --parallel "$parallel"
 ./../build/test/test_wBtries "$data_sets_file" "$query_file" --rank v5 --wsize 16 --min_size "$min_size" --parallel "$parallel"
 ./../build/test/test_wBtries "$data_sets_file" "$query_file" --rank v5 --wsize 32 --min_size "$min_size" --parallel "$parallel"
 ./../build/test/test_wBtries "$data_sets_file" "$query_file" --rank v5 --wsize 64 --min_size "$min_size" --parallel "$parallel"
+./../build/test/test_wBtries "$data_sets_file" "$query_file" --rank v --wsize 8 --min_size "$min_size" --parallel "$parallel"
 ./../build/test/test_wBtries "$data_sets_file" "$query_file" --rank v --wsize 16 --min_size "$min_size" --parallel "$parallel"
 ./../build/test/test_wBtries "$data_sets_file" "$query_file" --rank v --wsize 32 --min_size "$min_size" --parallel "$parallel"
 ./../build/test/test_wBtries "$data_sets_file" "$query_file" --rank v --wsize 64 --min_size "$min_size" --parallel "$parallel"
