@@ -4,23 +4,12 @@
 This repository contains implementations of adaptive data structures and algorithms, based on compressed tries, designed for efficient set intersection. These implementations support the results presented in the paper "Adaptive Set Intersection on the Word RAM" [cite the paper].
 The code was tested in ubuntu 22.04.5, cmake 3.22.1 and gcc 11.4.0 version. The code has dependencies on the [**sdsl**](https://github.com/simongog/sdsl-lite) library.
 
-To build the code in linux sistems, you have two options:
+To build the code in Linux systems, use the provided buildme.sh script. This script downloads the sdsl library directly into the build directory and then compiles the project.
 
-**Option 1: Automated Build (Recommended)**
-For a quick and easy setup, use the provided `buildme.sh` script. This script takes care of downloading the sdsl library directly into the build directory, and then it compiles the project for you.
-
-To build the code, simply run the script from the repository's root directory:
+Run the script from the repository's root directory:
 
     ./buildme.sh
     
-
-**Option 2: Manual Build**
-If you prefer to build the project manually, you must first install the sdsl library on your system. Once it is installed, run the following commands:
-
-    mkdir build
-    cd build
-    cmake ..
-    make
 
 Now, all executables are in **build** folder.
 
@@ -72,6 +61,7 @@ From the project's root directory, execute the `runme.sh` script and provide the
 ```
 
 The script will run all the tests. Upon completion, it will generate a file named `results_table.md` containing the results in a table similar to the one in the paper. Additionally, it will create a `.png` plot for each dataset, which will also be saved in the same directory.
+
 
 
 
