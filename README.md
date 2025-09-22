@@ -59,13 +59,7 @@ To reproduce the paper's experiments, follow these two steps:
 * Download the Data
 <!-- Get all the datasets from this link: https://zenodo.org/records/17166013/files/cc-news_4096.zip?download=1, https://zenodo.org/records/17153716/files/gov2.zip?download=1 and https://zenodo.org/records/17153716/files/clueweb09.zip?download=1 -->
 
-Get all the datasets from their respective Zenodo links.
-
-* **CC-News**: [Download Link](https://zenodo.org/records/17166013/files/cc-news_4096.zip?download=1)
-
-* **Gov2**: [Download Link](https://zenodo.org/records/17153716/files/gov2.zip?download=1)
-
-* **ClueWeb09**: [Download Link](https://zenodo.org/records/17153716/files/clueweb09.zip?download=1)
+Get all the datasets from their respective Zenodo links:**CC-News**: ([Download Link](https://zenodo.org/records/17166013/files/cc-news_4096.zip?download=1)), **Gov2**: ([Download Link](https://zenodo.org/records/17153716/files/gov2.zip?download=1)), and **ClueWeb09**: ([Download Link](https://zenodo.org/records/17153716/files/clueweb09.zip?download=1))
 
 * Run the Script
 Before running the script, ensure that Gnuplot is installed on your system, as it is required to generate the output plots.
@@ -78,6 +72,7 @@ From the project's root directory, execute the `runme.sh` script and provide the
 ```
 
 The script will run all the tests. Upon completion, it will generate a file named `results_table.md` containing the results in a table similar to the one in the paper. Additionally, it will create a `.png` plot for each dataset, which will also be saved in the same directory.
+
 
 
 
